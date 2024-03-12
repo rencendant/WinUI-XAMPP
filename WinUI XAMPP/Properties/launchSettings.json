@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinUI XAMPP (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinUI XAMPP (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
