@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 using CommunityToolkit.WinUI.Controls;
 
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 
@@ -22,7 +23,19 @@ namespace WinUI_XAMPP.Pages
         public HomePage()
         {
             InitializeComponent();
-            AppendXAMPPModules();
+            if (!App.IsAdmin())
+            {
+                NonElevatedInfoBar.IsOpen = !App.IsAdmin();
+            }
+            else
+            {
+                NonElevatedInfoBar.Title = "Administrator Mode";
+                NonElevatedInfoBar.Message = "Nice, You're Running as Administrator.";
+                NonElevatedInfoBar.Severity = InfoBarSeverity.Informational;
+                NonElevatedInfoBar.IsOpen = App.IsAdmin();
+                NonElevatedInfoBar.ActionButton = null;
+            }
+            //AppendXAMPPModules();
         }
 
         private void AppendXAMPPModules()
@@ -33,124 +46,94 @@ namespace WinUI_XAMPP.Pages
 
                 ToggleButton actionButton;
 
-                SettingsExpander apacheExpander = new()
-                {
-                    Header = "Apache 2.4",
-                    XamlRoot = ModulePanel.XamlRoot,
-                    Margin = new Microsoft.UI.Xaml.Thickness(0, 5, 0, 5)
-                };
-
-                SettingsCard apacheOptionsCard = new()
-                {
-                    HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Left,
-                    ContentAlignment = ContentAlignment.Left,
-                    XamlRoot = apacheExpander.XamlRoot
-                };
-
-                StackPanel apacheOptionsStackPanel = new StackPanel()
-                {
-                    Margin = new Microsoft.UI.Xaml.Thickness(-12, 0, 0, 0),
-                    Orientation = Orientation.Vertical,
-                    XamlRoot = apacheOptionsCard.XamlRoot
-                };
-
                 SettingsExpander mysqlExpander = new()
                 {
                     Header = "MySQL",
                     XamlRoot = ModulePanel.XamlRoot,
-                    Margin = new Microsoft.UI.Xaml.Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(0, 5, 0, 5)
                 };
 
                 SettingsExpander filezillaExpander = new()
                 {
                     Header = "FileZilla FTP Server",
                     XamlRoot = ModulePanel.XamlRoot,
-                    Margin = new Microsoft.UI.Xaml.Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(0, 5, 0, 5)
                 };
 
                 SettingsExpander mercuryExpander = new()
                 {
                     Header = "Mercury Mail",
                     XamlRoot = ModulePanel.XamlRoot,
-                    Margin = new Microsoft.UI.Xaml.Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(0, 5, 0, 5)
                 };
 
-                if (processes.Count != 0)
+                if (processes.Count != 0 && App.IsAdmin())
                 {
                     for (int i = 0; i < processes.Count; i++)
                     {
                         switch (processes[i].Name)
                         {
                             case "httpd":
-                                if (processes[i].ProcessId != -1 && processes[i].Port == 80)
-                                {
-                                    actionButton = new()
-                                    {
-                                        Width = 100
-                                    };
-                                    actionButton.Content = "Stop";
-                                    actionButton.Click += (sender, e) =>
-                                    {
-                                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                                        startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
-                                        startInfo.Arguments = "-k stop";
-                                        startInfo.CreateNoWindow = true;
-                                        Process.Start(startInfo);
-                                        actionButton.Content = "Start";
-                                    };
-                                    actionButton.IsChecked = true;
-                                    actionButton.XamlRoot = apacheExpander.XamlRoot;
-                                    if (actionButton.IsChecked == true)
-                                    {
-                                        actionButton.Click += (sender, e) =>
-                                        {
-                                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                                            startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
-                                            startInfo.Arguments = "-k start";
-                                            startInfo.CreateNoWindow = true;
-                                            Process.Start(startInfo);
-                                        };
-                                        actionButton.Content = "Stop";
-                                        apacheExpander.Content = actionButton;
-                                    }
-                                    apacheExpander.Content = actionButton;
-                                }
-                                else
-                                {
-                                    actionButton = new()
-                                    {
-                                        Width = 100
-                                    };
-                                    actionButton.Content = "Start";
-                                    actionButton.Click += (sender, e) =>
-                                    {
-                                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                                        startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
-                                        startInfo.Arguments = "-k start";
-                                        startInfo.CreateNoWindow = true;
-                                        Process.Start(startInfo);
-                                        actionButton.Content = "Stop";
-                                    };
-                                    actionButton.IsChecked = false;
-                                    actionButton.XamlRoot = apacheExpander.XamlRoot;
-                                    if (actionButton.IsChecked == false)
-                                    {
-                                        actionButton.Click += (sender, e) =>
-                                        {
-                                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                                            startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
-                                            startInfo.Arguments = "-k stop";
-                                            startInfo.CreateNoWindow = true;
-                                            Process.Start(startInfo);
-                                            actionButton.Content = "Start";
-                                        };
-                                        apacheExpander.Content = actionButton;
-                                    }
-                                    apacheExpander.Content = actionButton;
-                                }
-                                apacheOptionsCard.Content = apacheOptionsStackPanel;
-                                apacheExpander.Items.Add(apacheOptionsCard);
-                                ModulePanel.Children.Add(apacheExpander);
+                                //if (processes[i].ProcessId != -1 && processes[i].Port == 80)
+                                //{
+                                //    actionButton = new()
+                                //    {
+                                //        Width = 100
+                                //    };
+                                //    actionButton.Content = "Stop";
+                                //    actionButton.Click += (sender, e) =>
+                                //    {
+                                //        ProcessStartInfo startInfo = new ProcessStartInfo();
+                                //        startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
+                                //        startInfo.Arguments = "-k stop";
+                                //        startInfo.CreateNoWindow = true;
+                                //        Process.Start(startInfo);
+                                //        actionButton.Content = "Start";
+                                //    };
+                                //    actionButton.IsChecked = true;
+                                //    if (actionButton.IsChecked == true)
+                                //    {
+                                //        actionButton.Click += (sender, e) =>
+                                //        {
+                                //            ProcessStartInfo startInfo = new ProcessStartInfo();
+                                //            startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
+                                //            startInfo.Arguments = "-k start";
+                                //            startInfo.CreateNoWindow = true;
+                                //            Process.Start(startInfo);
+                                //        };
+                                //        actionButton.Content = "Stop";
+                                //    }
+                                //}
+                                //else
+                                //{
+                                //    actionButton = new()
+                                //    {
+                                //        Width = 100
+                                //    };
+                                //    actionButton.Content = "Start";
+                                //    actionButton.Click += (sender, e) =>
+                                //    {
+                                //        ProcessStartInfo startInfo = new ProcessStartInfo();
+                                //        startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
+                                //        startInfo.Arguments = "-k start";
+                                //        startInfo.CreateNoWindow = true;
+                                //        Process.Start(startInfo);
+                                //        actionButton.Content = "Stop";
+                                //    };
+                                //    actionButton.IsChecked = false;
+                                //    if (actionButton.IsChecked == false)
+                                //    {
+                                //        actionButton.Click += (sender, e) =>
+                                //        {
+                                //            ProcessStartInfo startInfo = new ProcessStartInfo();
+                                //            startInfo.FileName = $"{App.XAMPPDirectory}apache\\bin\\httpd.exe";
+                                //            startInfo.Arguments = "-k stop";
+                                //            startInfo.CreateNoWindow = true;
+                                //            Process.Start(startInfo);
+                                //            actionButton.Content = "Start";
+                                //        };
+                                //    }
+                                //}
                                 break;
                             case "mysqld":
                                 if (processes[i].ProcessId != -1 && processes[i].Port == 3306)
@@ -170,7 +153,7 @@ namespace WinUI_XAMPP.Pages
                                         actionButton.Content = "Start";
                                     };
                                     actionButton.IsChecked = true;
-                                    actionButton.XamlRoot = apacheExpander.XamlRoot;
+                                    //actionButton.XamlRoot = apacheExpander.XamlRoot;
                                     if (actionButton.IsChecked == true)
                                     {
                                         actionButton.Click += (sender, e) =>
@@ -203,7 +186,7 @@ namespace WinUI_XAMPP.Pages
                                         actionButton.Content = "Stop";
                                     };
                                     actionButton.IsChecked = false;
-                                    actionButton.XamlRoot = apacheExpander.XamlRoot;
+                                    //actionButton.XamlRoot = apacheExpander.XamlRoot;
                                     if (actionButton.IsChecked == false)
                                     {
                                         actionButton.Click += (sender, e) =>
@@ -245,7 +228,7 @@ namespace WinUI_XAMPP.Pages
             }
         }
 
-        private async void OpenTerminalButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        private async void OpenTerminalButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -258,7 +241,7 @@ namespace WinUI_XAMPP.Pages
                     FileName = "cmd.exe",
                     Arguments = $"/c {command}",
                     CreateNoWindow = true,
-                    UseShellExecute = false
+                    UseShellExecute = App.IsAdmin()
                 });
             }
             catch (Exception ex)
@@ -268,12 +251,13 @@ namespace WinUI_XAMPP.Pages
                     Title = "Error",
                     Content = ex.Message,
                     XamlRoot = Content.XamlRoot,
-                    CloseButtonText = "Close"
+                    CloseButtonText = "Close",
+                    DefaultButton = ContentDialogButton.Close
                 }.ShowAsync();
             }
         }
 
-        private async void OpenServicesButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        private async void OpenServicesButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -281,7 +265,7 @@ namespace WinUI_XAMPP.Pages
                 {
                     FileName = "services.msc",
                     CreateNoWindow = true,
-                    UseShellExecute = true
+                    UseShellExecute = App.IsAdmin()
                 });
             }
             catch (Exception ex)
@@ -291,7 +275,33 @@ namespace WinUI_XAMPP.Pages
                     Title = "Error",
                     Content = ex.Message,
                     XamlRoot = Content.XamlRoot,
-                    CloseButtonText = "Close"
+                    CloseButtonText = "Close",
+                    DefaultButton = ContentDialogButton.Close
+                }.ShowAsync();
+            }
+        }
+
+        private async void OpenXAMPPFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",
+                    Arguments = App.XAMPPDirectory,
+                    CreateNoWindow = true,
+                    UseShellExecute = App.IsAdmin()
+                });
+            }
+            catch (Exception ex)
+            {
+                await new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = ex.Message,
+                    XamlRoot = Content.XamlRoot,
+                    CloseButtonText = "Close",
+                    DefaultButton = ContentDialogButton.Close
                 }.ShowAsync();
             }
         }

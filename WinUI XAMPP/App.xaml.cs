@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Security.Principal;
+
+using Microsoft.UI.Xaml;
 
 using WinUI_XAMPP.Core;
 
@@ -29,11 +31,19 @@ namespace WinUI_XAMPP
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
             m_window.Activate();
         }
+
+        public static bool IsAdmin()
+        {
+            var identity = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
 
         private Window m_window;
     }

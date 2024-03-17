@@ -6,17 +6,21 @@
     xmlns:local="using:WinUI_XAMPP.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:winui="using:CommunityToolkit.WinUI.Controls" mc:Ignorable="d">
+    xmlns:winui="using:CommunityToolkit.WinUI.Controls" mc:Ignorable="d"
+    Background="Transparent">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <CommandBar Grid.Row="0" 
+        <CommandBar Grid.Row="0"
                     OverflowButtonVisibility="Collapsed"
                     DefaultLabelPosition="Right">
+            <AppBarButton x:Name="OpenXAMPPFolderButton"
+                          Label="Open XAMPP Folder"
+                          Click="OpenXAMPPFolderButton_Click"
+                          Icon="Folder"/>
             <AppBarButton x:Name="OpenServicesButton"
                           Label="Open Services"
                           Click="OpenServicesButton_Click">
@@ -34,23 +38,69 @@
             <AppBarButton Label="Help" 
                           Icon="Help"/>
         </CommandBar>
-        <ScrollViewer Grid.Row="1" >
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="ModulePanel" 
                         Margin="20,0">
+                <InfoBar x:Name="NonElevatedInfoBar"
+                         Title="Hello There"
+                         Message="You are accessing WinUI XAMPP without Administrator Privileges"
+                         Severity="Warning"
+                         IsClosable="False"
+                         Margin="0,0,0,10">
+                    <InfoBar.ActionButton>
+                        <Button Content="Restart as Administrator"
+                                HorizontalAlignment="Right"/>
+                    </InfoBar.ActionButton>
+                </InfoBar>
+                <winui:SettingsExpander x:Name="ApacheExpander"
+                                        Header="Apache">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Start" Width="100" Margin="0,0,5,0"/>
+                        <Button Content="Config" Width="100">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="Bottom">
+                                    <MenuFlyoutItem Text="httpd.conf (Apache)"/>
+                                    <MenuFlyoutItem Text="httpd-ssl.conf (Apache)"/>
+                                    <MenuFlyoutItem Text="httpd-xampp.conf (Apache)"/>
+                                    <MenuFlyoutSeparator/>
+                                    <MenuFlyoutItem Text="php.ini (PHP)"/>
+                                    <MenuFlyoutItem Text="config.ini.php (phpMyAdmin)"/>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
+                    <winui:SettingsExpander.Items>
+                        <winui:SettingsCard Header="Install as a Service">
+                            <ToggleSwitch OffContent="" OnContent=""/>
+                        </winui:SettingsCard>
+                        <winui:SettingsCard Header="Process IDs">
+                            <TextBlock Text="12345, 67890"
+                                       Foreground="LightGray"/>
+                        </winui:SettingsCard>
+                        <winui:SettingsCard Header="Ports Used">
+                            <TextBlock Text="80, 81, 443"
+                                       Foreground="LightGray"/>
+                        </winui:SettingsCard>
+                        <winui:SettingsCard Header="Logs">
+                            <StackPanel Orientation="Horizontal">
+                                <HyperlinkButton Content="Apache Access Log"/>
+                                <HyperlinkButton Content="Apache Error Log"
+                                                 Margin="5,0"/>
+                                <HyperlinkButton Content="PHP Error Log"/>
+                            </StackPanel>
+                        </winui:SettingsCard>
+                        <winui:SettingsCard Header="Browse Folder">
+                            <StackPanel Orientation="Horizontal">
+                                <HyperlinkButton Content="Apache"/>
+                                <HyperlinkButton Content="PHP"
+                                                 Margin="5,0"/>
+                                <HyperlinkButton Content="phpMyAdmin"/>
+                            </StackPanel>
+                        </winui:SettingsCard>
+                    </winui:SettingsExpander.Items>
+                </winui:SettingsExpander>
             </StackPanel>
         </ScrollViewer>
-        <winui:SettingsExpander Header="Logs"
-                                Grid.Row="2"
-                                Margin="20,10">
-            <winui:SettingsExpander.Items>
-                <winui:SettingsCard HorizontalContentAlignment="Left"
-                                    ContentAlignment="Left">
-                    <StackPanel Margin="-12,0,0,0"
-                                Orientation="Vertical">
-                        
-                    </StackPanel>
-                </winui:SettingsCard>
-            </winui:SettingsExpander.Items>
-        </winui:SettingsExpander>
     </Grid>
 </Page>

@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinUI_XAMPP.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    xmlns:winui="using:CommunityToolkit.WinUI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    FontFamily="Segoe UI Variable Display">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,6 +19,26 @@
                    FontSize="32"
                    FontFamily="Segoe UI Variable Display"
                    FontWeight="SemiBold"
-                   Margin="14,0"/>
+                   Margin="24"/>
+        <StackPanel Grid.Row="1"
+                    Margin="20,0">
+            <winui:SettingsExpander>
+                <winui:SettingsExpander.Header>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="WinUI XAMPP"
+                                   FontSize="13"/>
+                        <TextBlock Text="Modernized Version of XAMPP Control Panel" 
+                                   Foreground="LightGray"
+                                   FontSize="12"/>
+                    </StackPanel>
+                </winui:SettingsExpander.Header>
+                <winui:SettingsExpander.HeaderIcon>
+                    <FontIcon Glyph="&#xE946;"/>
+                </winui:SettingsExpander.HeaderIcon>
+                <TextBlock x:Name="AppVersion" 
+                           Text="1.0.0.0"
+                           Foreground="LightGray"/>
+            </winui:SettingsExpander>
+        </StackPanel>
     </Grid>
 </Page>
