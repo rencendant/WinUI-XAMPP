@@ -16,8 +16,10 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Pages\DebugPage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
+    <None Remove="Pages\Settings\SelectDefaultXAMPPDialog.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WinUI XAMPP.Core\WinUI XAMPP.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DebugPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Settings\SelectDefaultXAMPPDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\SettingsPage.xaml">

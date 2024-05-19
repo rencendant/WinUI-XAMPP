@@ -14,31 +14,81 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Settings"
-                   Grid.Row="0"
-                   FontSize="32"
-                   FontFamily="Segoe UI Variable Display"
-                   FontWeight="SemiBold"
-                   Margin="24"/>
-        <StackPanel Grid.Row="1"
-                    Margin="20,0">
-            <winui:SettingsExpander>
-                <winui:SettingsExpander.Header>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="WinUI XAMPP"
-                                   FontSize="13"/>
-                        <TextBlock Text="Modernized Version of XAMPP Control Panel" 
-                                   Foreground="LightGray"
-                                   FontSize="12"/>
+        <BreadcrumbBar x:Name="SettingsBreadcrumbBar"
+                       ItemsSource="{x:Bind SettingsBreadcrumbItems}"
+                       Grid.Row="0"
+                       Margin="24"
+                       Loaded="SettingsBreadcrumbBar_Loaded">
+            <BreadcrumbBar.ItemTemplate>
+                <DataTemplate x:DataType="local:BreadcrumbItem">
+                    <TextBlock Text="{x:Bind value}"
+                               FontSize="32"
+                               FontFamily="Segoe UI Variable Display"
+                               FontWeight="SemiBold" /> 
+                </DataTemplate>
+            </BreadcrumbBar.ItemTemplate>
+        </BreadcrumbBar>
+        <ScrollViewer Grid.Row="1"
+                      Margin="24,0,0,0">
+            <StackPanel Margin="0,0,24,0" Padding="0,0,0,20">
+                <winui:SettingsCard Header="Select Default XAMPP Directory" Margin="0,0,0,10">
+                    <Button x:Name="SelectXAMPPDirButton" Content="Select Default" Click="SelectXAMPPDirButton_Click"/>
+                </winui:SettingsCard>
+                <MenuFlyoutSeparator Margin="5,0"/>
+                <winui:SettingsCard Header="Language" Margin="0,10,0,0">
+                    <ComboBox x:Name="LanguagePicker" Width="150">
+                        <ComboBoxItem Content="English (US)" />
+                    </ComboBox>
+                </winui:SettingsCard>
+                <winui:SettingsCard Header="Service and Port Settings" Margin="0,10,0,0"
+                                    IsClickEnabled="True" ClickMode="Press">
+                    <winui:SettingsCard.ActionIcon>
+                        <FontIcon Glyph="&#xE76C;"/>
+                    </winui:SettingsCard.ActionIcon>
+                </winui:SettingsCard>
+                <winui:SettingsCard Header="Default Editor" Margin="0,10,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="DefaultFileEditorBox" Width="225" Margin="0,0,10,0"/>
+                        <Button x:Name="BrowseEditorButton" Content="Browse"/>
                     </StackPanel>
-                </winui:SettingsExpander.Header>
-                <winui:SettingsExpander.HeaderIcon>
-                    <FontIcon Glyph="&#xE946;"/>
-                </winui:SettingsExpander.HeaderIcon>
-                <TextBlock x:Name="AppVersion" 
-                           Text="1.0.0.0"
-                           Foreground="LightGray"/>
-            </winui:SettingsExpander>
-        </StackPanel>
+                </winui:SettingsCard>
+                <winui:SettingsCard Header="Default Browser" Margin="0,10,0,10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="DefaultBrowserEditorBox" Width="225" Margin="0,0,10,0"/>
+                        <Button x:Name="BrowseBrowserButton" Content="Browse"/>
+                    </StackPanel>
+                </winui:SettingsCard>
+                <MenuFlyoutSeparator Margin="5,0"/>
+                <winui:SettingsExpander Margin="0,10,0,0">
+                    <winui:SettingsExpander.Header>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock x:Name="AppTitle"
+                                       FontSize="13"/>
+                            <TextBlock x:Name="AppDescription"
+                                       Foreground="LightGray"
+                                       FontSize="12"/>
+                        </StackPanel>
+                    </winui:SettingsExpander.Header>
+                    <winui:SettingsExpander.HeaderIcon>
+                        <FontIcon Glyph="&#xE946;"/>
+                    </winui:SettingsExpander.HeaderIcon>
+                    <TextBlock x:Name="AppVersion"
+                               Foreground="LightGray"/>
+                    <winui:SettingsExpander.Items>
+                        <winui:SettingsCard Header="Related Links">
+                            <StackPanel Orientation="Horizontal">
+                                <HyperlinkButton x:Name="DocumentationLink" Content="Documentation" Margin="0,0,2.5,0"/>
+                                <HyperlinkButton x:Name="SourceCodeLink" Content="Source Code" Margin="2.5,0,0,0"/>
+                            </StackPanel>
+                        </winui:SettingsCard>
+                        <winui:SettingsCard Header="Check for Updates">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=""/>
+                            </StackPanel>
+                        </winui:SettingsCard>
+                    </winui:SettingsExpander.Items>
+                </winui:SettingsExpander>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

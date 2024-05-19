@@ -43,7 +43,6 @@
             <StackPanel x:Name="ModulePanel" 
                         Margin="20,0">
                 <InfoBar x:Name="NonElevatedInfoBar"
-                         Title="Hello There"
                          Message="You are accessing WinUI XAMPP without Administrator Privileges"
                          Severity="Warning"
                          IsClosable="False"

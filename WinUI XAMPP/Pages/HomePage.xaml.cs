@@ -15,9 +15,6 @@ using WinUI_XAMPP.Core;
 
 namespace WinUI_XAMPP.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class HomePage : Page
     {
         public HomePage()
@@ -27,15 +24,6 @@ namespace WinUI_XAMPP.Pages
             {
                 NonElevatedInfoBar.IsOpen = !App.IsAdmin();
             }
-            else
-            {
-                NonElevatedInfoBar.Title = "Administrator Mode";
-                NonElevatedInfoBar.Message = "Nice, You're Running as Administrator.";
-                NonElevatedInfoBar.Severity = InfoBarSeverity.Informational;
-                NonElevatedInfoBar.IsOpen = App.IsAdmin();
-                NonElevatedInfoBar.ActionButton = null;
-            }
-            //AppendXAMPPModules();
         }
 
         private void AppendXAMPPModules()

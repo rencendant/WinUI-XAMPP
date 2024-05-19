@@ -11,7 +11,7 @@
   <Identity
     Name="94aa8c61-338d-4309-9318-34fdfcbf6c0d"
     Publisher="CN=rencendant"
-    Version="1.0.0.0" />
+    Version="1.0.4924.0" />
 
   <mp:PhoneIdentity PhoneProductId="94aa8c61-338d-4309-9318-34fdfcbf6c0d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

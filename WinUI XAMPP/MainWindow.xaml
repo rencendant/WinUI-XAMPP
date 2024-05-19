@@ -23,14 +23,14 @@
               Canvas.ZIndex="5"
               x:Name="CustomTitleBar">
             <Image Source="Assets/Square44x44Logo.scale-400.png"
-                   Height="24"
-                   Width="24"
-                   Margin="12.5,2,0,0"
+                   Height="26"
+                   Width="26"
+                   Margin="12,1,0,0"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"/>
             <TextBlock x:Name="AppTitle"
                        FontSize="12"
-                       Margin="44,0,0,0"
+                       Margin="50,0,0,0"
                        FontFamily="Segoe UI Variable Display"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
@@ -39,15 +39,27 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         x:Name="AppSideBar"
-                        PaneDisplayMode="LeftCompact"
                         OpenPaneLength="250"
                         IsBackButtonVisible="Collapsed"
-                        SelectionChanged="AppSideBar_SelectionChanged">
+                        SelectionChanged="AppSideBar_SelectionChanged"
+                        Background="Transparent">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Name="Home" Icon="Home" Content="Home"/>
+                <NavigationViewItem x:Name="Debug" Content="Debug">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEBE8;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="Feedback" Content="Send Feedback">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE939;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
             <NavigationView.Content>
-                <Frame x:Name="AppFrame" Margin="0,0,0,0"/>
+                <Frame x:Name="AppFrame" Background="Transparent"/>
             </NavigationView.Content>
         </NavigationView>
     </Grid>
