@@ -75,9 +75,8 @@ namespace WinUI_XAMPP.Pages
 
                         if (parts.Length >= 2)
                         {
-                            string key = $"{parts[0].Trim()}";
+                            string key = parts[0].Trim();
                             string value = parts[1].Trim();
-
                             keyValuePairs[key] = value;
                         }
                     }
@@ -92,72 +91,6 @@ namespace WinUI_XAMPP.Pages
                             XamlRoot = XamppDirectoryPanel.XamlRoot
                         });
                     }
-
-                    //if (keyValuePairs.ContainsKey("Editor"))
-                    //{
-                    //    XamppDirectoryPanel.Children.Add(new SettingsCard()
-                    //    {
-                    //        Margin = new Microsoft.UI.Xaml.Thickness(10, 5, 10, 5),
-                    //        Header = "Default Editor",
-                    //        Content = keyValuePairs["Editor"],
-                    //        XamlRoot = XamppDirectoryPanel.XamlRoot
-                    //    });
-                    //}
-
-                    //if (keyValuePairs.ContainsKey("Browser"))
-                    //{
-                    //    XamppDirectoryPanel.Children.Add(new SettingsCard()
-                    //    {
-                    //        Margin = new Microsoft.UI.Xaml.Thickness(10, 5, 10, 5),
-                    //        Header = "Default Browser",
-                    //        Content = keyValuePairs["Browser"] != null && keyValuePairs["Browser"] != "" ? keyValuePairs["Browser"] : "No Default Browser Set",
-                    //        XamlRoot = XamppDirectoryPanel.XamlRoot
-                    //    });
-                    //}
-
-                    //if (keyValuePairs.ContainsKey("Debug"))
-                    //{
-                    //    XamppDirectoryPanel.Children.Add(new SettingsCard()
-                    //    {
-                    //        Margin = new Microsoft.UI.Xaml.Thickness(10, 5, 10, 5),
-                    //        Header = "Debug",
-                    //        Content = keyValuePairs["Debug"] != null && keyValuePairs["Debug"] != "" ? keyValuePairs["Debug"] : "No Debug Set",
-                    //        XamlRoot = XamppDirectoryPanel.XamlRoot
-                    //    });
-                    //}
-
-                    //if (keyValuePairs.ContainsKey("Debuglevel"))
-                    //{
-                    //    XamppDirectoryPanel.Children.Add(new SettingsCard()
-                    //    {
-                    //        Margin = new Microsoft.UI.Xaml.Thickness(10, 5, 10, 5),
-                    //        Header = "Debug Level",
-                    //        Content = keyValuePairs["Debuglevel"] != null && keyValuePairs["Debuglevel"] != "" ? keyValuePairs["Debuglevel"] : "No Debug Level Set",
-                    //        XamlRoot = XamppDirectoryPanel.XamlRoot
-                    //    });
-                    //}
-
-                    //if (keyValuePairs.ContainsKey("TomcatVisible"))
-                    //{
-                    //    XamppDirectoryPanel.Children.Add(new SettingsCard()
-                    //    {
-                    //        Margin = new Microsoft.UI.Xaml.Thickness(10, 5, 10, 5),
-                    //        Header = "Tomcat UI Visibility",
-                    //        Content = keyValuePairs["TomcatVisible"] != null && keyValuePairs["TomcatVisible"] != "" ? keyValuePairs["TomcatVisible"] : "No Tomcat UI Visibility Set",
-                    //        XamlRoot = XamppDirectoryPanel.XamlRoot
-                    //    });
-                    //}
-
-                    //if (keyValuePairs.ContainsKey("Language"))
-                    //{
-                    //    XamppDirectoryPanel.Children.Add(new SettingsCard()
-                    //    {
-                    //        Margin = new Microsoft.UI.Xaml.Thickness(10, 5, 10, 5),
-                    //        Header = "Tomcat UI Visibility",
-                    //        Content = keyValuePairs["Language"] != null && keyValuePairs["Language"] != "" ? keyValuePairs["Language"] == "en" : "No Tomcat UI Visibility Set",
-                    //        XamlRoot = XamppDirectoryPanel.XamlRoot
-                    //    });
-                    //}
                 }
             }
         }

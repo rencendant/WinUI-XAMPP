@@ -83,7 +83,14 @@
                         </winui:SettingsCard>
                         <winui:SettingsCard Header="Check for Updates">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text=""/>
+                                <Button x:Name="CheckUpdateButton" Click="CheckUpdateButton_Click" Width="175">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon Glyph="&#xE895;" Margin="0,0,10,0" FontSize="12"/>
+                                            <TextBlock Text="Check for Updates" />
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
                             </StackPanel>
                         </winui:SettingsCard>
                     </winui:SettingsExpander.Items>

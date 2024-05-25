@@ -8,10 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Title="Select Default XAMPP Directory" 
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    PrimaryButtonText="Save" DefaultButton="Primary" CornerRadius="6">
+    PrimaryButtonText="Save" DefaultButton="Primary" SecondaryButtonText="Cancel" CornerRadius="6">
 
     <Grid Width="500"
-          Height="250">
+          Height="Auto"
+          x:Name="DialogParent">
 
     </Grid>
 </ContentDialog>
